@@ -1,10 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +23,7 @@
     "knex": "^1.0.4",
     "morgan": "^1.10.0",
     "pg": "^8.7.3"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }
