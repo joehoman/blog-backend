@@ -30,4 +30,5 @@ module.exports = {
   production: {
     client: 'pg',
     connection: process.env.CONNECTION_STRING
+    }
   },
