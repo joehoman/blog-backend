@@ -14,7 +14,7 @@ app.use(morgan("tiny"));
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-
+console.log('NODE ENVIRONMENT PER HEROKU', process.env.NODE_ENV)
 //getting all posts
   app.get('/posts', function(req, res){
       dbConnection
