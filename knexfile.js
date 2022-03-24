@@ -1,5 +1,6 @@
 // Update with your config settings.
 require("dotenv").config()
+let connectionString = process.env.DATABASE_URL;
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
@@ -8,7 +9,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: process.env.CONNECTION_STRING
+    connection: connectionString,
   },
 
   staging: {

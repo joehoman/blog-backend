@@ -6,7 +6,7 @@ const knex = require("knex");
 const cookieParser = require('cookie-parser')
 const bcrypt = require ('bcryptjs');
 const cors = require('cors');
-const dbConnection = knex(process.env.CONNECTION_STRING)
+const dbConnection = require('./db/dbConnection')
 const session = require("express-session")
 const generateToken = require('./util/generateToken')
 
