@@ -4,6 +4,8 @@ require("dotenv").config()
  * @type { Object.<string, import("knex").Knex.Config> }
  */
 
+let connectionString = process.env.DATABASE_URL;
+
 module.exports = {
 
   development: {
@@ -29,6 +31,6 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: process.env.CONNECTION_STRING
+    connection: {connectionString, ssl: {rejectUnauthorized:false}},
     }
   },
