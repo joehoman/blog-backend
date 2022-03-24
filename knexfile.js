@@ -29,7 +29,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: process.env.CONNECTION_STRING, {ssl: {rejectUnauthorized: false}}
+    connection: process.env.CONNECTION_STRING, ssl: {rejectUnauthorized: false}
   }
 
 };
