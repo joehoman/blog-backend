@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const knex = require("knex");
-const cookieParser = require('cookie-parser')
 const bcrypt = require ('bcryptjs');
 const cors = require('cors');
 const dbConnection = require('./db/dbConnection')
@@ -13,8 +12,6 @@ const generateToken = require('./util/generateToken')
 app.use(morgan("tiny"));
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
-console.log('NODE ENVIRONMENT PER HEROKU', process.env.NODE_ENV)
 //getting all posts
   app.get('/posts', function(req, res){
       dbConnection
@@ -49,7 +46,6 @@ console.log('NODE ENVIRONMENT PER HEROKU', process.env.NODE_ENV)
     .insert({ title: req.body.title, content: req.body.content, created_by: req.body.created_by }).from('posts')
         .then((data) => res.status(201).json(data))
         .catch((err) => {
-          // console.error(err);
           res.status(404).json({ message: "Something is wrong."})
       })
     });
@@ -61,7 +57,6 @@ app.delete('/posts/', function(req, res){
   .delete('*').where({title: req.body.title, created_by:req.body.user}).from('posts')
       .then((data) => res.status(201).json(data))
       .catch((err) => {
-        // console.error(err);
         res.status(404).json({ message: "Something is wrong."})
     })
   });
@@ -75,7 +70,6 @@ app.get('/posts/specific/:title', function(req, res){
   .from('posts')
   .then((data) => res.status(201).json(data))
   .catch((err) => {
-        // console.error(err);
         res.status(404).json({ message: "Something is wrong."})
     })
   });
@@ -89,7 +83,6 @@ app.get('/posts/specific/:title', function(req, res){
     .from('posts')
     .then((data) => res.status(201).json(data))
     .catch((err) => {
-          // console.error(err);
           res.status(404).json({ message: "Something is wrong."})
       })
     });
@@ -107,7 +100,6 @@ app.post('/register', async (req, res) => {
         token:generateToken(username)
        });
     } catch(e) {
-      console.log(e)
       res.status(500).send('Something Went Wrong');
     }
   });
@@ -122,7 +114,6 @@ app.post('/register', async (req, res) => {
       const {username, password} = req.body;
       user = await dbConnection.select('*').where({username: username}).from('users')
       if (user.length){
-        console.log(user)
         const validPass = await bcrypt.compare(password, user[0].password_hash);
         if(validPass) {
           res.status(201).json({
@@ -140,7 +131,6 @@ app.post('/register', async (req, res) => {
       }
 
       catch(e) {
-      console.log(e)
       res.status(500).send('Something Went Wrong');
       }
     });
