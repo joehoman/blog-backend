@@ -95,10 +95,9 @@ app.post('/register', async (req, res) => {
       const user = req.body;
       const hash = await bcrypt.hash(password, 12);
       await dbConnection.insert({username: username, password_hash: hash, first_name: first_name, last_name: last_name}).from('users');
-      res.status(201).json({
-        user: username,
-        token:generateToken(username)
-       });
+      res.status(201).json(
+        "success"
+       );
     } catch(e) {
       res.status(500).send('Something Went Wrong');
     }
